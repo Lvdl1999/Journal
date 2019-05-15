@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Journal</string>
+    <string name="submit_entry">Submit entry!</string>
 </resources>
