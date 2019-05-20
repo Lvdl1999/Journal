@@ -19,6 +19,9 @@ public class InputActivity extends AppCompatActivity {
         // Creating a new intent and navigating to next activity (Input Activity)
         Intent i = new Intent(InputActivity.this, DetailActivity.class);
         startActivity(i);
+
+        // methode addEntry aanmaken bij onclick method
+
     }
 
 }
