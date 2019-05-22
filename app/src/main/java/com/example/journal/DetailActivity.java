@@ -15,7 +15,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        JournalEntry retrievedJournalentry = (JournalEntry) intent.getSerializableExtra("journalEntry");
+        JournalEntry retrievedJournalentry = (JournalEntry) intent.getSerializableExtra("journal_entry");
 
         TextView detailtitle = findViewById(R.id.id_title);
         TextView detaildate = findViewById(R.id.id_date);

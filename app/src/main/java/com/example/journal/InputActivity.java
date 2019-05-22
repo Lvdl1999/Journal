@@ -20,9 +20,11 @@ public class InputActivity extends AppCompatActivity {
 
         EditText title1 = findViewById(R.id.editText1);
         EditText content1 = findViewById(R.id.editText2);
+        EditText mood1 = findViewById(R.id.moodinput);
 
         String title = title1.getText().toString();
         String content = content1.getText().toString();
+        String mood = mood1.getText().toString();
 
         // Creating a new intent and navigating to next activity (Input Activity)
         Intent i = new Intent(InputActivity.this, DetailActivity.class);
@@ -30,7 +32,7 @@ public class InputActivity extends AppCompatActivity {
 
         // methode addEntry aanmaken bij onclick method
 
-        JournalEntry journalEntry = new JournalEntry(title, content, "happy");
+        JournalEntry journalEntry = new JournalEntry(title, content, mood);
 
         // doorgeven van de journalentry object aan database
 

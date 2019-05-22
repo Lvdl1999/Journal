@@ -3,8 +3,10 @@ package com.example.journal;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -53,23 +55,30 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-        // Retrieve item that was clicked
-        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-
-        JournalEntry journalEntry = new JournalEntry(
-                cursor.getInt(cursor.getColumnIndex("_id")),
-                cursor.getString(cursor.getColumnIndex("title")),
-                cursor.getString(cursor.getColumnIndex("content")),
-                cursor.getString(cursor.getColumnIndex("mood")),
-                cursor.getString(cursor.getColumnIndex("timestamp")));
-
-
-        journalEntry.setTimestamp(cursor.getString(cursor.getColumnIndex("timestamp")));
-
         // Detail activity
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 
-        intent.putExtra("journalEntry", journalEntry);
+        // Retrieve item that was clicked
+        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+        Log.d("klikiets", "lekker geklikt: ");
+        System.out.println("klikiets");
+        System.out.println(position);
+        System.out.println("               !!!! ");
+
+
+        int id_ = cursor.getInt(cursor.getColumnIndex("_id"));
+        String title_= cursor.getString(cursor.getColumnIndex("title"));
+        String content_ = cursor.getString(cursor.getColumnIndex("content"));
+        String mood_ = cursor.getString(cursor.getColumnIndex("mood"));
+        String timestamp_ = cursor.getString(cursor.getColumnIndex("timestamp"));
+
+        JournalEntry journal = new JournalEntry(id_, title_, content_, mood_, timestamp_);
+
+//        journal.setTimestamp(cursor.getString(cursor.getColumnIndex("timestamp")));
+
+        intent.putExtra("journal_entry", (Parcelable) journal);
+
+        // move to third activity
         startActivity(intent);
 
         }
