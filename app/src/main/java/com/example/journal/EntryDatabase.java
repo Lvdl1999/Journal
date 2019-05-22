@@ -1,5 +1,6 @@
 package com.example.journal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,10 +19,10 @@ public class EntryDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "create table journaltable (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, mood INTEGER, timestamp INTEGER);";
+        String query = "create table journaltable (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, mood TEXT, timestamp DATETIME default current_timestamp);";
         db.execSQL(query);
 
-        String test = "INSERT INTO journaltable (title, content, mood) VALUES('test', 'test', 'test');";
+        String test = "INSERT INTO journaltable (title, content, mood) VALUES('test', 'test', 'blij');";
         db.execSQL(test);
 
     }
@@ -44,8 +45,34 @@ public class EntryDatabase extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public void insertEntry (JournalEntry journalEntry){
 
+        String title = journalEntry.getTitle();
 
+        String content = journalEntry.getContent();
+
+        String mood = journalEntry.getMood();
+
+        SQLiteDatabase database = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("title", title);
+        contentValues.put("content", content);
+        contentValues.put("mood", mood);
+
+        database.insert("journaltable", null, contentValues);
+
+    }
+
+    public void delete(long id){
+
+        SQLiteDatabase database = getWritableDatabase();
+
+        String sql = "DELETE FROM database WHERE id =" + id;
+        database.execSQL(sql);
+
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
