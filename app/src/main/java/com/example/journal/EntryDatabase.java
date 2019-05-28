@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
-
-
 public class EntryDatabase extends SQLiteOpenHelper {
     private static EntryDatabase instance;
 

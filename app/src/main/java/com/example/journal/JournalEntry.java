@@ -1,10 +1,6 @@
 package com.example.journal;
 
-
-import android.content.Context;
-
 import java.io.Serializable;
-import java.util.Map;
 
 public class JournalEntry implements Serializable {
 
@@ -31,44 +27,25 @@ public class JournalEntry implements Serializable {
         this.mood = mood;
     }
 
-    // Getters and setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    // Getters
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     public String getMood() {
         return mood;
     }
 
-    public void setMood(String mood) {
-        this.mood = mood;
-    }
 
     public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
 }

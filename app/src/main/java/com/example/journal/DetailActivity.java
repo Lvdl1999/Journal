@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class DetailActivity extends AppCompatActivity {
+
+    TextView detailtitle;
+    TextView detailmood;
+    TextView detaildate;
+    TextView detailcontent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,12 +22,14 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         JournalEntry retrievedJournalentry = (JournalEntry) intent.getSerializableExtra("journal_entry");
 
-        TextView detailtitle = findViewById(R.id.id_title);
-        TextView detaildate = findViewById(R.id.id_date);
-        TextView detailmood = findViewById(R.id.id_mood);
-        TextView detailcontent = findViewById(R.id.id_content);
+        // Saving all textviews to change it's text
+        detailtitle = findViewById(R.id.id_title);
+        detaildate = findViewById(R.id.id_date);
+        detailmood = findViewById(R.id.id_mood);
+        detailcontent = findViewById(R.id.id_content);
 
-        detaildate.setText("The date is: " + retrievedJournalentry.getTimestamp());
+        // Updating textviews
+        detaildate.setText("The date was: " + retrievedJournalentry.getTimestamp());
         detailmood.setText("My mood was: " + retrievedJournalentry.getMood());
         detailtitle.setText(retrievedJournalentry.getTitle());
         detailcontent.setText(retrievedJournalentry.getContent());

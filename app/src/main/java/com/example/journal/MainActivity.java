@@ -1,21 +1,15 @@
 package com.example.journal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.Serializable;
-
 public class MainActivity extends AppCompatActivity {
 
-    EntryDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +21,10 @@ public class MainActivity extends AppCompatActivity {
         Cursor records = db.selectAll();
         EntryAdapter entryAdapter = new EntryAdapter(MainActivity.this, R.layout.entry_row, records);
 
-        // link aan listview in main
-        ListView listView = (ListView) findViewById(R.id.listview_main);
-
+        // Setting adapter to listview in MainActivity
+        ListView listView = findViewById(R.id.listview_main);
         listView.setOnItemLongClickListener(new ListLongClickListener());
         listView.setAdapter(entryAdapter);
-
         listView.setOnItemClickListener(new ItemClickListener());
 
     }
@@ -47,12 +39,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateData() {
-
         EntryDatabase db = EntryDatabase.getInstance(getApplicationContext());
         Cursor cursor = db.selectAll();
         EntryAdapter adapter = new EntryAdapter(MainActivity.this, R.layout.entry_row, cursor);
         adapter.swapCursor(cursor);
-
     }
 
     private class ItemClickListener implements AdapterView.OnItemClickListener {
@@ -69,21 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
         JournalEntry journal = new JournalEntry(id_, title_, content_, mood_, timestamp_);
 
-//        journal.setTimestamp(cursor.getString(cursor.getColumnIndex("timestamp")));
-
-        // Detail activity
+        // Changing intent to detail activity
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 
         intent.putExtra("journal_entry", journal);
 
-        // move to third activity
+        // Move to third activity
         startActivity(intent);
 
         }
     }
 
 
-// In case an item is being long clicked
+// In case an item is being long clicked it'll be deleted
     private class ListLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
 
