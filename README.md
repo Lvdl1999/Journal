@@ -27,3 +27,8 @@ Once someone presses a journal from the listview, the app will show it's details
 
 <img width="150" alt="image" src="https://user-images.githubusercontent.com/47352487/58507519-3c657080-8192-11e9-8e60-4d1f5786f05d.png">
 
+### Landscape version
+
+<img width="350" alt="image" src="https://user-images.githubusercontent.com/47352487/58509648-58b7dc00-8197-11e9-866c-03494269aba1.png">
+<img width="350" alt="image" src="https://user-images.githubusercontent.com/47352487/58509869-dd0a5f00-8197-11e9-9a3d-8b8467efbde7.png">
+
