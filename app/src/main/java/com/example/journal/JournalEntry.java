@@ -3,12 +3,13 @@ package com.example.journal;
 
 import android.content.Context;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class JournalEntry {
+public class JournalEntry implements Serializable {
 
 //    properties wat JournalEntry bevat
-    private Integer id;
+    int id;
     private String title;
     private String mood;
     private String timestamp;

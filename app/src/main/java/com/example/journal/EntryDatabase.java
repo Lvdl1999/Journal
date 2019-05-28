@@ -21,10 +21,6 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
         String query = "create table journaltable (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, mood TEXT, timestamp DATETIME default current_timestamp);";
         db.execSQL(query);
-
-        String test = "INSERT INTO journaltable (title, content, mood) VALUES('test', 'test', 'blij');";
-        db.execSQL(test);
-
     }
 
     // singleton concept: je mag niet bij de database maar wel vragen of er al een wasom te gebruiken en anders maakt ie nieuwe
@@ -53,6 +49,8 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
         String mood = journalEntry.getMood();
 
+        String timestamp = journalEntry.getTimestamp();
+
         SQLiteDatabase database = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -60,6 +58,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         contentValues.put("title", title);
         contentValues.put("content", content);
         contentValues.put("mood", mood);
+        contentValues.put("timestamp", timestamp);
 
         database.insert("journaltable", null, contentValues);
 
@@ -67,11 +66,9 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     public void delete(long id){
 
-        SQLiteDatabase database = getWritableDatabase();
+        SQLiteDatabase database = instance.getWritableDatabase();
 
-        String sql = "DELETE FROM database WHERE id =" + id;
-        database.execSQL(sql);
-
+        database.execSQL("DELETE FROM entries WHERE _id = " + id);
     }
 
     @Override

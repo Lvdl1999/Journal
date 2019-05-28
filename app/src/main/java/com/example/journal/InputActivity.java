@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class InputActivity extends AppCompatActivity {
 
     @Override
@@ -25,6 +28,8 @@ public class InputActivity extends AppCompatActivity {
         String title = title1.getText().toString();
         String content = content1.getText().toString();
         String mood = mood1.getText().toString();
+        Date current_time = Calendar.getInstance().getTime();
+        String timestamp = String.valueOf(current_time);
 
         // Creating a new intent and navigating to next activity (Input Activity)
         Intent i = new Intent(InputActivity.this, DetailActivity.class);
@@ -32,7 +37,7 @@ public class InputActivity extends AppCompatActivity {
 
         // methode addEntry aanmaken bij onclick method
 
-        JournalEntry journalEntry = new JournalEntry(title, content, mood);
+        JournalEntry journalEntry = new JournalEntry(0, title, content, mood, timestamp);
 
         // doorgeven van de journalentry object aan database
 

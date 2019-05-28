@@ -18,7 +18,7 @@
 
     <ListView
         android:id="@+id/listview_main"
-        android:layout_width="390dp"
-        android:layout_height="642dp" />
+        android:layout_width="match_parent"
+        android:layout_height="630dp" />
 
 </android.support.design.widget.CoordinatorLayout>

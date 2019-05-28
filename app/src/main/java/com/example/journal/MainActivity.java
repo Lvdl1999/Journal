@@ -15,6 +15,8 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
+    EntryDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new ListLongClickListener());
         listView.setAdapter(entryAdapter);
+
+        listView.setOnItemClickListener(new ItemClickListener());
 
     }
 
@@ -54,17 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private class ItemClickListener implements AdapterView.OnItemClickListener {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-        // Detail activity
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-
         // Retrieve item that was clicked
         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-        Log.d("klikiets", "lekker geklikt: ");
-        System.out.println("klikiets");
-        System.out.println(position);
-        System.out.println("               !!!! ");
-
 
         int id_ = cursor.getInt(cursor.getColumnIndex("_id"));
         String title_= cursor.getString(cursor.getColumnIndex("title"));
@@ -76,7 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        journal.setTimestamp(cursor.getString(cursor.getColumnIndex("timestamp")));
 
-        intent.putExtra("journal_entry", (Parcelable) journal);
+        // Detail activity
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+
+        intent.putExtra("journal_entry", journal);
 
         // move to third activity
         startActivity(intent);
@@ -85,16 +83,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+// In case an item is being long clicked
     private class ListLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
 
-        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long id) {
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-            ListView listView = (ListView) findViewById(R.id.listview_main);
-            int position = listView.getPositionForView(view);
+            Cursor element = (Cursor) adapterView.getItemAtPosition(position);
+            EntryDatabase database = EntryDatabase.getInstance(getApplicationContext());
+            database.delete(element.getInt(element.getColumnIndex("_id")));
 
-            EntryDatabase db = EntryDatabase.getInstance(getApplicationContext());
-            db.delete(position);
             updateData();
 
             return false;

@@ -30,7 +30,7 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView entryTitle = view.findViewById(R.id.entrytitle);
         String title = cursor.getString(cursor.getColumnIndex("title"));
 
-        TextView entrymood = view.findViewById(R.id.entrymood);
+        TextView entryMood = view.findViewById(R.id.entrymood);
         String mood = cursor.getString(cursor.getColumnIndex("mood"));
 
         TextView entryDate = view.findViewById(R.id.entrydate);
@@ -38,11 +38,11 @@ public class EntryAdapter extends ResourceCursorAdapter {
 
 
         // set time and date
-        entryDate.setText(date);
+        entryDate.setText(String.valueOf(date));
         // set title
         entryTitle.setText(title);
         // set mood
-        entrymood.setText(mood);
+        entryMood.setText(mood);
 
     }
 }
